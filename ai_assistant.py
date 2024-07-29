@@ -87,8 +87,7 @@ def execute_command(query):
         engine.say(results)
         engine.runAndWait()
 
-    elif 'shutdown' in query.lower():
-        os.system("shutdown /s /t 1")
+ 
 
     elif 'joke' in query.lower():
         engine.say(pyjokes.get_joke())
@@ -102,30 +101,7 @@ def execute_command(query):
         os.startfile(random.choice(songs))
 
 
-    elif 'image' in query.lower():
-        images = ["image1.jpg", "image2.jpg", "image3.jpg"]
-        engine.say("Displaying a random image")
-        engine.runAndWait()
-        os.startfile(random.choice(images))
 
-
-    elif 'face' in query.lower():
-        face_cascade = cv2.CascadeClassifier("haarcascade\_frontalface\_default.xml")
-        engine.say("Please look at the camera")
-        engine.runAndWait()
-        cap = cv2.VideoCapture(0)
-        while True:
-            ret, img = cap.read()
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, 1.1, 4)
-            for (x, y, w, h) in faces:
-                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.imshow('img', img)
-            k = cv2.waitKey(30) & 0xff
-            if k == 27:
-                break
-        cap.release()
-        cv2.destroyAllWindows()
 
     else:
         engine.say("I don't understand")
